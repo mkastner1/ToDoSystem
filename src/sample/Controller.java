@@ -10,7 +10,17 @@ import java.io.IOException;
 
 public class Controller {
     public void onStatusClicked(ActionEvent actionEvent) {
+        Parent root = null;
+        try {
+            Stage stage = new Stage();
 
+            root = FXMLLoader.load(getClass().getResource("StatusGUI.fxml"));
+            stage.setTitle("Stati");
+            stage.setScene(new Scene(root, 300, 275));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onPriorityClicked(ActionEvent actionEvent) {
@@ -27,4 +37,5 @@ public class Controller {
         }
 
     }
+
 }
