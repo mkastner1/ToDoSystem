@@ -14,6 +14,7 @@ public class Controller {
 
     public void onStatusClicked(ActionEvent actionEvent) {
         Parent root = null;
+
         try {
             Stage stage = new Stage();
             root = FXMLLoader.load(getClass().getResource("StatusGUI.fxml"));
@@ -28,17 +29,16 @@ public class Controller {
 
     public void onPriorityClicked(ActionEvent actionEvent) {
         Parent root = null;
+
         try {
             Stage stage = new Stage();
 
             root = FXMLLoader.load(getClass().getResource("priority.fxml"));
             stage.setTitle("Prioritäten");
-            stage.setScene(new Scene(root, 300, 275));
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }
