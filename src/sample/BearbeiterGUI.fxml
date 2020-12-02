@@ -3,14 +3,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.BearbeiterGUI">
+<AnchorPane prefHeight="217.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserController">
    <children>
-      <TextField disable="true" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="574.0" promptText="Bearbeiter-ID " AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
-      <TextField layoutX="14.0" layoutY="47.0" promptText="Name " AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0" />
-      <TextField layoutX="14.0" layoutY="81.0" promptText="Straße " AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="85.0" />
-      <TextField layoutX="14.0" layoutY="115.0" promptText="PLZ " AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="123.0" />
-      <TextField layoutX="14.0" layoutY="160.0" promptText="Ort " AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="160.0" />
-      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="OK " AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Label layoutX="237.0" layoutY="54.0" text="Straße" AnchorPane.leftAnchor="237.0" AnchorPane.topAnchor="54.0" />
+      <Label layoutX="238.0" layoutY="18.0" text="Name" AnchorPane.leftAnchor="238.0" AnchorPane.topAnchor="18.0" />
+      <Label layoutX="244.0" layoutY="88.0" text="PLZ" AnchorPane.leftAnchor="244.0" AnchorPane.topAnchor="88.0" />
+      <Label layoutX="245.0" layoutY="123.0" text="Ort" AnchorPane.leftAnchor="245.0" AnchorPane.topAnchor="123.0" />
+      <TextField fx:id="nameTextField" layoutX="285.0" layoutY="14.0" prefHeight="25.0" prefWidth="470.0" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="14.0" />
+      <TextField fx:id="streetTextField" layoutX="285.0" layoutY="50.0" prefHeight="25.0" prefWidth="470.0" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="50.0" />
+      <TextField fx:id="zipTextField" layoutX="285.0" layoutY="84.0" prefHeight="25.0" prefWidth="470.0" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="84.0" />
+      <TextField fx:id="locationTextField" layoutX="285.0" layoutY="119.0" prefHeight="25.0" prefWidth="470.0" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="119.0" />
+      <Button layoutX="519.0" layoutY="367.0" mnemonicParsing="false" onAction="#saveClicked" text="Speichern" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="12.0" />
+      <Button layoutX="433.0" layoutY="367.0" mnemonicParsing="false" onAction="#cancleClicked" text="Abbrechen" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="93.0" />
+      <ListView fx:id="userListView" layoutY="-1.0" onMouseClicked="#itemSelected" prefHeight="172.0" prefWidth="200.0" />
+      <Button layoutX="14.0" layoutY="184.0" mnemonicParsing="false" onAction="#newClicked" text="New" />
+      <Button layoutX="74.0" layoutY="184.0" mnemonicParsing="false" onAction="#deleteClicked" text="Delete" />
    </children>
 </AnchorPane>

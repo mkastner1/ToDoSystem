@@ -11,6 +11,7 @@ import java.io.IOException;
 
 public class Controller {
     public static Stage statusStage;
+    public static Stage userStage;
 
     public void onStatusClicked(ActionEvent actionEvent) {
         Parent root = null;
@@ -37,6 +38,22 @@ public class Controller {
             stage.setTitle("Prioritäten");
             stage.setScene(new Scene(root));
             stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onUserClicked(ActionEvent actionEvent) {
+        Parent root = null;
+
+        try {
+            Stage stage = new Stage();
+
+            root = FXMLLoader.load(getClass().getResource("BearbeiterGUI.fxml"));
+            stage.setTitle("Benutzer");
+            stage.setScene(new Scene(root));
+            stage.show();
+            userStage = stage;
         } catch (IOException e) {
             e.printStackTrace();
         }

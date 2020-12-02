@@ -38,7 +38,6 @@ public class StatusController {
     if(s != null){
         nameTextfield.setText(s.getName());
         selectedItem = s;
-        System.out.println(s.getId());
     }
     }
 
