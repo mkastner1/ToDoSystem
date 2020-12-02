@@ -47,9 +47,7 @@ public class Status {
         PreparedStatement statement = null;
         try {
             statement = conn.getConnection().prepareStatement("SELECT * from gr2_status");
-
-
-        ResultSet results = statement.executeQuery();
+            ResultSet results = statement.executeQuery();
 
         while (results.next()){
             Status tmp = new Status(results.getInt("status_id"),results.getString("name"));

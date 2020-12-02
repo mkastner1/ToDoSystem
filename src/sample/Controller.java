@@ -5,19 +5,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.model.Status;
 
 import java.io.IOException;
 
 public class Controller {
+    public static Stage statusStage;
+
     public void onStatusClicked(ActionEvent actionEvent) {
         Parent root = null;
         try {
             Stage stage = new Stage();
-
             root = FXMLLoader.load(getClass().getResource("StatusGUI.fxml"));
             stage.setTitle("Stati");
-            stage.setScene(new Scene(root, 300, 275));
+            stage.setScene(new Scene(root, 1000, 500));
             stage.show();
+            statusStage = stage;
         } catch (IOException e) {
             e.printStackTrace();
         }
