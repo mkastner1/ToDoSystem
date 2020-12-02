@@ -41,7 +41,6 @@ public class Priority {
 
     public static ObservableList<Priority> getList() {
         ObservableList<Priority> list = FXCollections.observableArrayList();
-
         AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
 
         try {
@@ -58,5 +57,44 @@ public class Priority {
         }
 
         return list;
+    }
+
+    public static void addItem(Priority p) {
+        AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
+
+        try {
+            PreparedStatement statement = conn.getConnection().prepareStatement("INSERT INTO gr2_priority (name) " +
+                    "VALUES ('" + p.name + "')");
+
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void updateItem(Priority p) {
+        AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
+
+        try {
+            PreparedStatement statement = conn.getConnection().prepareStatement("UPDATE gr2_priority SET name='" +
+                    p.getName() + "' WHERE priority_id=" + p.getId());
+
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void deleteItem(int id) {
+        AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
+
+        try {
+            PreparedStatement statement = conn.getConnection().prepareStatement("DELETE FROM gr2_priority WHERE " +
+                    "priority_id=" + id);
+
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
