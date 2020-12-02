@@ -4,14 +4,31 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import sample.model.Priority;
 import sample.model.Status;
+import sample.model.ToDo;
 
 import java.io.IOException;
 
 public class Controller {
+    public ListView toDoListView;
+    public ComboBox statusComboBox;
+    public ComboBox priorityComboBox;
+    public TextField TicketnameTextField;
+    public Pane contentPane;
     public static Stage statusStage;
     public static Stage userStage;
+
+    public void initialize() {
+        toDoListView.setItems(ToDo.getList());
+        statusComboBox.setItems(Status.getList());
+        priorityComboBox.setItems(Priority.getList());
+    }
 
     public void onStatusClicked(ActionEvent actionEvent) {
         Parent root = null;
@@ -20,7 +37,7 @@ public class Controller {
             Stage stage = new Stage();
             root = FXMLLoader.load(getClass().getResource("StatusGUI.fxml"));
             stage.setTitle("Stati");
-            stage.setScene(new Scene(root, 1000, 500));
+            stage.setScene(new Scene(root));
             stage.show();
             statusStage = stage;
         } catch (IOException e) {
