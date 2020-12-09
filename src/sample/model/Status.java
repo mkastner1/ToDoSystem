@@ -59,4 +59,38 @@ public class Status {
 
         return list;
     }
+
+    public static void addItem(Status s) {
+        AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
+
+        try {
+            PreparedStatement statement = conn.getConnection().prepareStatement("INSERT INTO gr2_status (name) VALUES ('" + s.getName()+"')");
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void updateItem(Status s) {
+        AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
+
+        try {
+            PreparedStatement statement = conn.getConnection().prepareStatement("UPDATE `gr2_status` SET `name` = '"+s.getName()+"' WHERE `gr2_status`.`status_id` = '"+s.getId()+"'");
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void deleteItem(int id) {
+        AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
+
+        try {
+            PreparedStatement statement = conn.getConnection().prepareStatement("DELETE from gr2_status WHERE status_id ='" + id +"'");
+
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }

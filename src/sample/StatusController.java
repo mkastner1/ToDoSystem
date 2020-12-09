@@ -42,22 +42,15 @@ public class StatusController {
     }
 
     public void saveClicked(ActionEvent actionEvent) {
+        Status s;
         if(selectedItem == null){
-            try {
-                statement = conn.getConnection().prepareStatement("INSERT INTO gr2_status (name) VALUES ('" + nameTextfield.getText()+"')");
-                statement.execute();
-                statusListView.setItems(Status.getList());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            s = new Status(0, nameTextfield.getText());
+            Status.addItem(s);
+            statusListView.setItems(Status.getList());
         }else {
-            try {
-                statement = conn.getConnection().prepareStatement("UPDATE `gr2_status` SET `name` = '"+nameTextfield.getText()+"' WHERE `gr2_status`.`status_id` = '"+selectedItem.getId()+"'");
-                statement.execute();
-                statusListView.setItems(Status.getList());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            s = new Status(selectedItem.getId(),nameTextfield.getText());
+            Status.updateItem(s);
+            statusListView.setItems(Status.getList());
         }
     }
 
@@ -68,13 +61,8 @@ public class StatusController {
     }
 
     public void deleteClicked(ActionEvent actionEvent) {
-        try {
-            statement = conn.getConnection().prepareStatement("DELETE from gr2_status WHERE status_id ='" + selectedItem.getId() +"'");
-            statement.executeUpdate();
-            statusListView.setItems(Status.getList());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Status.deleteItem(selectedItem.getId());
+        statusListView.setItems(Status.getList());
     }
 
     public void cancelClicked(ActionEvent actionEvent) {
