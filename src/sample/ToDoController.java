@@ -28,7 +28,7 @@ public class ToDoController {
 
         int i = 0;
         for (i = 0; i < statusComboBox.getItems().size(); i++) {
-            if (statusComboBox.getItems().get(i).getId() == selected.getStatus().getId()) {
+            if (((Status) statusComboBox.getItems().get(i)).getId() == ((ToDo) selected).getStatusId()) {
                 break;
             }
 

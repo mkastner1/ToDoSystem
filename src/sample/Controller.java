@@ -78,7 +78,7 @@ public class Controller {
     }
 
     public void onToDoClicked(MouseEvent mouseEvent) {
-        ToDo selectedElement = toDoListView.getSelectionModel().getSelectedItems();
+        ToDo selectedElement = (ToDo) toDoListView.getSelectionModel().getSelectedItem();
 
         if (selectedElement != null) {
             // Stelle die Daten des gewählten ToDos auf der rechten Seite dar.
@@ -92,7 +92,7 @@ public class Controller {
 
                 controller.setToDo(selectedElement);
 
-                contentPane.getChildren().add(toDoPane);
+                contentPane.getChildren().add(controller.toDoPane);
             } catch (IOException e) {
                 e.printStackTrace();
             }
