@@ -43,6 +43,7 @@ public class StatusController {
 
     public void saveClicked(ActionEvent actionEvent) {
         Status s;
+
         if(selectedItem == null){
             s = new Status(0, nameTextfield.getText());
             Status.addItem(s);
