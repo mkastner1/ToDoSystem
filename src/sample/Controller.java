@@ -99,4 +99,9 @@ public class Controller {
 
         }
     }
+
+    public void onFileClicked(ActionEvent actionEvent) {
+        Stage stage =Main.mainStage;
+        stage.close();
+    }
 }
