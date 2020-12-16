@@ -1,9 +1,11 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import sample.model.Priority;
 import sample.model.Status;
 import sample.model.ToDo;
@@ -45,5 +47,20 @@ public class ToDoController {
 
             priorityComboBox.getSelectionModel().select(i);
         }
+    }
+
+    public void onSaveClicked(ActionEvent actionEvent) {
+        selected.setName(nameTextField.getText());
+        selected.setDescription(descriptionTextArea.getText());
+        selected.setPriorityId(((Priority) priorityComboBox.getSelectionModel().getSelectedItem()).getId());
+        selected.setStatusId(((Status) statusComboBox.getSelectionModel().getSelectedItem()).getId());
+
+        if (selected != null) {
+            ToDo.update(selected);
+        }
+    }
+
+    public void onCancelClicked(ActionEvent actionEvent) {
+        
     }
 }

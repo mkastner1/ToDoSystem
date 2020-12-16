@@ -88,7 +88,7 @@ public class Controller {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("todo.fxml"));
                 Pane root = loader.load();
 
-                ToDoController controller = (ToDoController) loader.getController();
+                ToDoController controller = loader.getController();
 
                 controller.setToDo(selectedElement);
 
@@ -100,8 +100,8 @@ public class Controller {
         }
     }
 
-    public void onFileClicked(ActionEvent actionEvent) {
-        Stage stage =Main.mainStage;
+    public void onCloseClicked(ActionEvent actionEvent) {
+        Stage stage = Main.mainStage;
         stage.close();
     }
 }

@@ -89,4 +89,19 @@ public class ToDo {
 
         return list;
     }
+
+    public static void update(ToDo toDo) {
+        AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
+
+        try {
+            PreparedStatement statement = conn.getConnection().prepareStatement("UPDATE gr2_todo SET name='" +
+                    toDo.getName() + "', description='" + toDo.getDescription() + "', status_id=" +
+                    toDo.getStatusId() + ", priority_id=" + toDo.getPriorityId() + " WHERE todo_id=" +
+                    toDo.getTodoId());
+
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
