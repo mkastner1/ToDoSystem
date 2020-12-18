@@ -9,6 +9,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onNewClicked" text="Neu" />
               <MenuItem mnemonicParsing="false" onAction="#onCloseClicked" text="Close" />
             </items>
           </Menu>
@@ -40,5 +41,6 @@
       <Label layoutX="234.0" layoutY="38.0" text="Priorität: " AnchorPane.leftAnchor="234.0" AnchorPane.topAnchor="38.0" />
       <TextField fx:id="TicketnameTextField" layoutY="73.0" prefHeight="25.0" prefWidth="211.0" promptText="Ticketname" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0" />
       <Pane fx:id="contentPane" layoutX="211.0" layoutY="73.0" prefHeight="361.0" prefWidth="521.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="73.0" />
+      <Button layoutX="465.0" layoutY="34.0" mnemonicParsing="false" onAction="#applyFilters" text="Filter übernehmen " AnchorPane.leftAnchor="465.0" AnchorPane.topAnchor="34.0" />
    </children>
 </AnchorPane>

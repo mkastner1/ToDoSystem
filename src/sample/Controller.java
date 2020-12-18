@@ -91,6 +91,7 @@ public class Controller {
                 ToDoController controller = loader.getController();
 
                 controller.setToDo(selectedElement);
+                controller.setToDoList(toDoListView.getItems());
 
                 contentPane.getChildren().add(controller.toDoPane);
             } catch (IOException e) {
@@ -103,5 +104,24 @@ public class Controller {
     public void onCloseClicked(ActionEvent actionEvent) {
         Stage stage = Main.mainStage;
         stage.close();
+    }
+
+    public void applyFilters(ActionEvent actionEvent) {
+        toDoListView.setItems(ToDo.getList());
+    }
+
+    public void onNewClicked(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("todo.fxml"));
+            Pane root = loader.load();
+            ToDoController controller = loader.getController();
+
+            controller.setToDo(null);
+            controller.setToDoList(toDoListView.getItems());
+
+            contentPane.getChildren().add(controller.toDoPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

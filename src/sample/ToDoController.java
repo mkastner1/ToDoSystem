@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -17,6 +18,7 @@ public class ToDoController {
     public ComboBox priorityComboBox;
     public AnchorPane toDoPane;
     private ToDo selected = null;
+    private ObservableList<ToDo> todoList;
 
     public void setToDo(ToDo item) {
         selected = item;
@@ -30,33 +32,42 @@ public class ToDoController {
         statusComboBox.setItems(new Status().getList());
         priorityComboBox.setItems(new Priority().getList());
 
-        nameTextField.setText(selected.getName());
-        descriptionTextArea.setText(selected.getDescription());
+        if (selected != null) {
+            nameTextField.setText(selected.getName());
+            descriptionTextArea.setText(selected.getDescription());
 
-        for (i = 0; i < statusComboBox.getItems().size(); i++) {
-            if (((Status) statusComboBox.getItems().get(i)).getId() == selected.getStatusId()) {
-                break;
+            for (i = 0; i < statusComboBox.getItems().size(); i++) {
+                if (((Status) statusComboBox.getItems().get(i)).getId() == selected.getStatusId()) {
+                    break;
+                }
+
+                statusComboBox.getSelectionModel().select(i);
             }
+            for (i = 0; i < priorityComboBox.getItems().size(); i++) {
+                if (((Priority) priorityComboBox.getItems().get(i)).getId() == selected.getPriorityId()) {
+                    break;
+                }
 
-            statusComboBox.getSelectionModel().select(i);
-        }
-        for (i = 0; i < priorityComboBox.getItems().size(); i++) {
-            if (((Priority) priorityComboBox.getItems().get(i)).getId() == selected.getPriorityId()) {
-                break;
+                priorityComboBox.getSelectionModel().select(i);
             }
-
-            priorityComboBox.getSelectionModel().select(i);
         }
     }
 
-    public void onSaveClicked(ActionEvent actionEvent) {
-        selected.setName(nameTextField.getText());
-        selected.setDescription(descriptionTextArea.getText());
-        selected.setPriorityId(((Priority) priorityComboBox.getSelectionModel().getSelectedItem()).getId());
-        selected.setStatusId(((Status) statusComboBox.getSelectionModel().getSelectedItem()).getId());
+    public void setToDoList(ObservableList<ToDo> list) {
+        this.todoList = list;
+    }
 
+    public void onSaveClicked(ActionEvent actionEvent) {
         if (selected != null) {
+            selected.setName(nameTextField.getText());
+            selected.setDescription(descriptionTextArea.getText());
+            selected.setPriorityId(((Priority) priorityComboBox.getSelectionModel().getSelectedItem()).getId());
+            selected.setStatusId(((Status) statusComboBox.getSelectionModel().getSelectedItem()).getId());
             ToDo.update(selected);
+        } else {
+            ToDo.add(new ToDo(0, nameTextField.getText(), descriptionTextArea.getText(),
+                    ((Status) statusComboBox.getSelectionModel().getSelectedItem()).getId(),
+                    ((Priority) priorityComboBox.getSelectionModel().getSelectedItem()).getId()));
         }
     }
 

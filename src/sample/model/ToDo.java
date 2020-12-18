@@ -90,6 +90,37 @@ public class ToDo {
         return list;
     }
 
+    public static ObservableList<ToDo> getList(int statusId, int priorityId) {
+        ObservableList<ToDo> list = FXCollections.observableArrayList();
+        AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
+
+        try {
+            String str = "SELECT * FROM gr2_todo ";
+
+            if (statusId == -1 && priorityId != -1) {
+                str += "WHERE priority_id=" + priorityId;
+            } else if (statusId != -1 && priorityId == -1) {
+                str += "WHERE status_id=" + statusId;
+            } else if (statusId != -1 && priorityId != -1) {
+                str += "WHERE status_id=" + statusId + " AND priority_id=" + priorityId;
+            }
+
+            PreparedStatement statement = conn.getConnection().prepareStatement(str);
+            ResultSet results = statement.executeQuery();
+
+            while(results.next()) {
+                ToDo tmp = new ToDo(results.getInt("todo_id"), results.getString("name"), results.getString("description"),
+                        results.getInt("status_id"), results.getInt("priority_id"));
+
+                list.add(tmp);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return list;
+    }
+
     public static void update(ToDo toDo) {
         AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
 
@@ -98,6 +129,20 @@ public class ToDo {
                     toDo.getName() + "', description='" + toDo.getDescription() + "', status_id=" +
                     toDo.getStatusId() + ", priority_id=" + toDo.getPriorityId() + " WHERE todo_id=" +
                     toDo.getTodoId());
+
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void add(ToDo toDo) {
+        AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
+
+        try {
+            PreparedStatement statement = conn.getConnection().prepareStatement("INSERT INTO gr2_todo " +
+                    "(name, description, status_id, priority_id) VALUES ('" + toDo.name + "', '" + toDo.description +
+                    "', " + toDo.statusId + ", " + toDo.priorityId + ")");
 
             statement.executeUpdate();
         } catch (SQLException throwables) {
