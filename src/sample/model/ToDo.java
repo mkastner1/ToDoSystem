@@ -90,21 +90,37 @@ public class ToDo {
         return list;
     }
 
-    public static ObservableList<ToDo> getList(int statusId, int priorityId) {
+    public static ObservableList<ToDo> getList(int statusId, int priorityId, String name) {
         ObservableList<ToDo> list = FXCollections.observableArrayList();
         AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
+        String str = "SELECT * FROM gr2_todo ";
+
+        if (!name.equals("")) {
+            str += "WHERE name='" + name + "' ";
+            if (statusId == 0) {
+                if (priorityId != 0) {
+                    str += "AND priority_id=" + priorityId;
+                }
+            } else {
+                str += "AND status_id=" + statusId;
+                if (priorityId != 0) {
+                    str += " AND priority_id=" + priorityId;
+                }
+            }
+        } else {
+            if (statusId == 0) {
+                if (priorityId != 0) {
+                    str += "WHERE priority_id=" + priorityId;
+                }
+            } else {
+                str += "WHERE status_id=" + statusId;
+                if (priorityId != 0) {
+                    str += " AND priority_id=" + priorityId;
+                }
+            }
+        }
 
         try {
-            String str = "SELECT * FROM gr2_todo ";
-
-            if (statusId == -1 && priorityId != -1) {
-                str += "WHERE priority_id=" + priorityId;
-            } else if (statusId != -1 && priorityId == -1) {
-                str += "WHERE status_id=" + statusId;
-            } else if (statusId != -1 && priorityId != -1) {
-                str += "WHERE status_id=" + statusId + " AND priority_id=" + priorityId;
-            }
-
             PreparedStatement statement = conn.getConnection().prepareStatement(str);
             ResultSet results = statement.executeQuery();
 

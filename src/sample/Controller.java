@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,18 +18,30 @@ import sample.model.ToDo;
 import java.io.IOException;
 
 public class Controller {
-    public ListView toDoListView;
-    public ComboBox statusComboBox;
-    public ComboBox priorityComboBox;
-    public TextField TicketnameTextField;
+    public ListView<ToDo> toDoListView;
+    public ComboBox<Status> statusComboBox;
+    public ComboBox<Priority> priorityComboBox;
     public Pane contentPane;
+    public TextField ticketnameTextField;
     public static Stage statusStage;
     public static Stage userStage;
 
+
     public void initialize() {
+        Status noStatusSelected = new Status(0, "Bitte auswählen ");
+        Priority noPrioritySelected = new Priority(0, "Bitte auswählen ");
+        ObservableList<Status> status = Status.getList();
+        ObservableList<Priority> priorities = Priority.getList();
+
+        status.add(0, noStatusSelected);
+        priorities.add(0, noPrioritySelected);
+
         toDoListView.setItems(ToDo.getList());
-        statusComboBox.setItems(Status.getList());
-        priorityComboBox.setItems(Priority.getList());
+        statusComboBox.setItems(status);
+        priorityComboBox.setItems(priorities);
+
+        statusComboBox.getSelectionModel().select(noStatusSelected);
+        priorityComboBox.getSelectionModel().select(noPrioritySelected);
     }
 
     public void onStatusClicked(ActionEvent actionEvent) {
@@ -107,7 +120,8 @@ public class Controller {
     }
 
     public void applyFilters(ActionEvent actionEvent) {
-        toDoListView.setItems(ToDo.getList());
+        toDoListView.setItems(ToDo.getList(statusComboBox.getSelectionModel().getSelectedItem().getId(),
+                priorityComboBox.getSelectionModel().getSelectedItem().getId(), ticketnameTextField.getText()));
     }
 
     public void onNewClicked(ActionEvent actionEvent) {
