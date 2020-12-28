@@ -3,13 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#KeyListener" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#onNewClicked" text="Neu" />
               <MenuItem mnemonicParsing="false" onAction="#onCloseClicked" text="Close" />
             </items>
           </Menu>
@@ -30,6 +29,8 @@
                         <MenuItem mnemonicParsing="false" onAction="#onUserClicked" text="anzeigen/bearbeiten " />
                     </items>
                 </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#onNewClicked" text="Neu" />
+                  <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#onDelete" text="Löschen " />
             </items>
           </Menu>
         </menus>
@@ -41,6 +42,6 @@
       <Label layoutX="234.0" layoutY="38.0" text="Priorität: " AnchorPane.leftAnchor="234.0" AnchorPane.topAnchor="38.0" />
       <TextField fx:id="ticketnameTextField" layoutY="73.0" prefHeight="25.0" prefWidth="211.0" promptText="Ticketname" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0" />
       <Pane fx:id="contentPane" layoutX="211.0" layoutY="73.0" prefHeight="361.0" prefWidth="521.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="73.0" />
-      <Button layoutX="465.0" layoutY="34.0" mnemonicParsing="false" onAction="#applyFilters" text="Filter übernehmen " AnchorPane.leftAnchor="465.0" AnchorPane.topAnchor="34.0" />
+      <Button layoutX="465.0" layoutY="34.0" mnemonicParsing="false" onAction="#onUpdate" text="Aktualisieren " AnchorPane.leftAnchor="465.0" AnchorPane.topAnchor="34.0" />
    </children>
 </AnchorPane>

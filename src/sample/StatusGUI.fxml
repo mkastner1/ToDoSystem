@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.StatusController">
+<AnchorPane onKeyPressed="#KeyListener" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.StatusController">
    <children>
       <TextField fx:id="nameTextfield" layoutX="324.0" layoutY="20.0" prefHeight="25.0" prefWidth="261.0" promptText="Name " AnchorPane.leftAnchor="324.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0" />
       <Button layoutX="505.0" layoutY="361.0" mnemonicParsing="false" onAction="#saveClicked" prefHeight="25.0" prefWidth="74.0" text="Speichern" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="21.0" />

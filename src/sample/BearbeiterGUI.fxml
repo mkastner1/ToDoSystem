@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="217.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserController">
+<AnchorPane onKeyPressed="#KeyListener" prefHeight="217.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserController">
    <children>
       <Label layoutX="237.0" layoutY="54.0" text="Straße" AnchorPane.leftAnchor="237.0" AnchorPane.topAnchor="54.0" />
       <Label layoutX="238.0" layoutY="18.0" text="Name" AnchorPane.leftAnchor="238.0" AnchorPane.topAnchor="18.0" />

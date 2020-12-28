@@ -165,4 +165,17 @@ public class ToDo {
             throwables.printStackTrace();
         }
     }
+
+    public static void delete(int id) {
+        AbstractDatabase conn = new MySQLConnector("d0345761", "5AHEL2021", "rathgeb.at", 3306, "d0345761");
+
+        try {
+            PreparedStatement statement = conn.getConnection().prepareStatement("DELETE FROM gr2_todo WHERE " +
+                    "todo_id=" + id);
+
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="toDoPane" prefHeight="427.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ToDoController">
+<AnchorPane fx:id="toDoPane" onKeyPressed="#KeyListener" prefHeight="427.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ToDoController">
    <children>
       <TextField fx:id="nameTextField" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="573.0" promptText="Name" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
       <TextArea fx:id="descriptionTextArea" layoutX="14.0" layoutY="51.0" prefHeight="200.0" prefWidth="573.0" promptText="Beschreibung" AnchorPane.bottomAnchor="149.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="51.0" />

@@ -7,7 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -23,9 +26,9 @@ public class Controller {
     public ComboBox<Priority> priorityComboBox;
     public Pane contentPane;
     public TextField ticketnameTextField;
+    public MenuItem deleteMenuItem;
     public static Stage statusStage;
     public static Stage userStage;
-
 
     public void initialize() {
         Status noStatusSelected = new Status(0, "Bitte auswählen ");
@@ -91,11 +94,10 @@ public class Controller {
     }
 
     public void onToDoClicked(MouseEvent mouseEvent) {
-        ToDo selectedElement = (ToDo) toDoListView.getSelectionModel().getSelectedItem();
+        ToDo selectedElement = toDoListView.getSelectionModel().getSelectedItem();
 
         if (selectedElement != null) {
             // Stelle die Daten des gewählten ToDos auf der rechten Seite dar.
-
 
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("todo.fxml"));
@@ -119,11 +121,6 @@ public class Controller {
         stage.close();
     }
 
-    public void applyFilters(ActionEvent actionEvent) {
-        toDoListView.setItems(ToDo.getList(statusComboBox.getSelectionModel().getSelectedItem().getId(),
-                priorityComboBox.getSelectionModel().getSelectedItem().getId(), ticketnameTextField.getText()));
-    }
-
     public void onNewClicked(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("todo.fxml"));
@@ -136,6 +133,42 @@ public class Controller {
             contentPane.getChildren().add(controller.toDoPane);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void onDelete(ActionEvent actionEvent) {
+        if (toDoListView.getSelectionModel().getSelectedItem() != null) {
+            ToDo.delete(toDoListView.getSelectionModel().getSelectedItem().getTodoId());
+        }
+    }
+
+    public void onUpdate(ActionEvent actionEvent) {
+        toDoListView.setItems(ToDo.getList(statusComboBox.getSelectionModel().getSelectedItem().getId(),
+                priorityComboBox.getSelectionModel().getSelectedItem().getId(), ticketnameTextField.getText()));
+    }
+
+    /** Tastenkombinationen:
+     * <ul>
+     *     <li><b>STRG + N: </b>Neues ToDo erstellen. </li>
+     *     <li><b>STRG + U: </b>Aktualisieren. </li>
+     *     <li><b>ENTF: </b>ToDo löschen. </li>
+     * </ul>
+     *
+     * @param keyEvent KeyEvent mit keyCode.
+     */
+    public void KeyListener(KeyEvent keyEvent) {
+        KeyCode keyCode = keyEvent.getCode();
+
+        if (keyEvent.isControlDown()) {
+            if (keyCode == KeyCode.N) {
+                onNewClicked(new ActionEvent());
+            } else if (keyCode == KeyCode.U) {
+                onUpdate(new ActionEvent());
+            }
+        } else {
+            if (keyCode == KeyCode.DELETE) {
+                onDelete(new ActionEvent());
+            }
         }
     }
 }

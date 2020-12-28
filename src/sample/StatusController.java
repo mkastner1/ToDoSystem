@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -69,5 +71,33 @@ public class StatusController {
     public void cancelClicked(ActionEvent actionEvent) {
         Stage stage =Controller.statusStage;
         stage.close();
+    }
+
+    /** Tastenkombinationen:
+     * <ul>
+     *     <li><b>STRG + S: </b>Speichern. </li>
+     *     <li><b>STRG + C: </b>Abbrechen. </li>
+     *     <li><b>STRG + N: </b>Neue Priorität. </li>
+     *     <li><b>ENTF: </b>Priorität löschen. </li>
+     * </ul>
+     *
+     * @param keyEvent KeyEvent mit keyCode.
+     */
+    public void KeyListener(KeyEvent keyEvent) {
+        KeyCode keyCode = keyEvent.getCode();
+
+        if (keyEvent.isControlDown()) {
+            if (keyCode == KeyCode.S) {
+                saveClicked(new ActionEvent());
+            } else if (keyCode == KeyCode.N) {
+                newClicked(new ActionEvent());
+            } else if (keyCode == KeyCode.C){
+                cancelClicked(new ActionEvent());
+            }
+        } else {
+            if (keyCode == KeyCode.DELETE) {
+                deleteClicked(new ActionEvent());
+            }
+        }
     }
 }

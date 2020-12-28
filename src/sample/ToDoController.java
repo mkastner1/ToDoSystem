@@ -1,12 +1,14 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import sample.model.Priority;
 import sample.model.Status;
 import sample.model.ToDo;
@@ -19,6 +21,15 @@ public class ToDoController {
     public AnchorPane toDoPane;
     private ToDo selected = null;
     private ObservableList<ToDo> todoList;
+
+    public void initialize() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                nameTextField.requestFocus();
+            }
+        });
+    }
 
     public void setToDo(ToDo item) {
         selected = item;
@@ -73,5 +84,25 @@ public class ToDoController {
 
     public void onCancelClicked(ActionEvent actionEvent) {
         
+    }
+
+    /** Tastenkombinationen:
+     * <ul>
+     *     <li><b>STRG + S: </b>Speichern. </li>
+     *     <li><b>STRG + C: </b>Abbrechen. </li>
+     * </ul>
+     *
+     * @param keyEvent KeyEvent mit keyCode.
+     */
+    public void KeyListener(KeyEvent keyEvent) {
+        KeyCode keyCode = keyEvent.getCode();
+
+        if (keyEvent.isControlDown()) {
+            if (keyCode == KeyCode.S) {
+                onSaveClicked(new ActionEvent());
+            } else if (keyCode == KeyCode.C) {
+                onCancelClicked(new ActionEvent());
+            }
+        }
     }
 }
